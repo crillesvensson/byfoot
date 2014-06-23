@@ -1,0 +1,17 @@
+<% if user_signed_in? %>
+	
+
+	<div id="navbar">
+		<div id="navbuttons">
+	        <ul>
+	            <li><%= button_to 'Find', users_home_path, class: 'navbarButton', method: :get %></li>
+	            <li><%= button_to 'Find', users_home_path, class: 'navbarButton', method: :get %></li>
+	            <li><%= button_to 'Find', users_home_path, class: 'navbarButton', method: :get %></li>
+	            <li><%= button_to 'Find', users_home_path, class: 'navbarButton', method: :get %></li>
+	            <li><%= button_to 'Home', users_home_path, class: 'navbarButton', method: :get %></li>
+	        </ul>
+    	</div>
+        <%= button_to "Log out", destroy_user_session_path, id: 'logoutButton',method: "delete" %>
+	</div>
+
+<% end %>
