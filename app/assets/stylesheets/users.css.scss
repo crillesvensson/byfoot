@@ -12,6 +12,7 @@
   	margin-left: auto;
  	margin-right: auto;
  	margin-top: 50px;
+    padding-top: 20px;
 
  	border: 1px solid #4e3043; /* Fallback */
     border: 1px solid rgba(78,48,67, 0.8);
@@ -34,4 +35,8 @@
 
 #userDiv h1{
 	color:#000000;
+}
+
+#userDiv{
+    color:#000000;
 }
