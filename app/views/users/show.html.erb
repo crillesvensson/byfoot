@@ -1,0 +1,46 @@
+<div id="userDiv">
+	<div class="container-fluid">
+  		<div class="row-fluid">
+    		<div class="span4">
+
+    		</div>
+    		<div class="span8">
+				<h1><%= @user.email %></h1>
+				<table class="table table-striped">
+  
+  					<th>User Information</th>
+  					<th></th>
+					  	<tr>
+					    	<th>Name</th>
+					    	<td><%= @user.firstname %></td>
+					  	</tr>
+					  	<tr>
+					    	<th>Last name</th>
+					    	<td><%= @user.lastname %></td>
+					  	</tr>
+					    <tr>
+					    	<th>E-mail</th>
+					    	<td><%= @user.email %></td>
+					  	</tr>
+					    <tr>
+					    	<th>Phone</th>
+					    	<td><%= @user.phone %></td>
+					  	</tr>
+					    <tr>
+					    	<th>Birthday</th>
+					    	<td><%= @user.birthday %></td>
+					  	</tr>
+					    <tr>
+					    	<th>Country</th>
+					   	 	<td><%= @user.country %></td>
+					  	</tr>
+					  	<tr>
+					    	<th>City</th>
+					   	 	<td><%= @user.city %></td>
+					  	</tr>
+					</table>  
+    		</div>
+  		</div>
+  	</div>	
+	
+</div>

@@ -99,7 +99,11 @@ body {
 
 //design and layout of form input fields for email and password
 #signIn input[type=email],
-#signIn input[type=password] {
+#signIn input[type=password],
+#signIn input[type=text],
+#signIn input[type=date],
+#signIn input[type=number],
+#signIn textarea {
     /* Size and position */
     width: 95%;
     padding: 8px 4px 8px 10px;
@@ -126,33 +130,44 @@ body {
 }
 
 //Design of placeholders
-#signIn input::-webkit-input-placeholder {
+#signIn input::-webkit-input-placeholder,
+#signIn textarea::-webkit-input-placeholder {
     color: #ffffff;
     text-shadow: 0 1px 0 rgba(255,255,255,0.15);
 }
  
  //Design of placeholders
-#signIn input:-moz-placeholder {
+#signIn input:-moz-placeholder,
+#signIn textare:-moz-placeholder {
     color: #ffffff;
     text-shadow: 0 1px 0 rgba(255,255,255,0.15);
 }
  
  //Design of placeholders
-#signIn input:-ms-input-placeholder {
+#signIn input:-ms-input-placeholder,
+#signIn textarea:-ms-input-placeholder {
     color: #ffffff;
     text-shadow: 0 1px 0 rgba(255,255,255,0.15);
 }
 
 //border for form input fields
 #signIn input[type=email]:hover,
-#signIn input[type=password]:hover {
+#signIn input[type=password]:hover,
+#signIn input[type=text]:hover,
+#signIn input[type=date]:hover,
+#signIn input[type=number]:hover,
+#signIn textarea:hover {
     border-color: #333;
 }
  
  //shadow for form input fields and login button
 #signIn input[type=email]:focus,
 #signIn input[type=password]:focus,
-#signIn input[type=submit]:focus {
+#signIn input[type=submit]:focus,
+#signIn input[type=text]:focus,
+#signIn input[type=date]:focus,
+#signIn input[type=number]focus,
+#signIn textarea:focus {
     box-shadow: 
         0 1px 0 rgba(255,255,255,0.2), 
         inset 0 1px 1px rgba(0,0,0,0.1),
@@ -162,7 +177,11 @@ body {
  
 /* Fallback */
 .no-boxshadow #signIn input[type=email]:focus,
-.no-boxshadow #signIn input[type=password]:focus {
+.no-boxshadow #signIn input[type=password]:focus,
+.no-boxshadow #signIn input[type=text]:focus,
+.no-boxshadow #signIn input[type=date],
+.no-boxshadow #signIn input[type=number]:focus,
+.no-boxshadow #signIn textarea:focus {
     outline: 1px solid white;
 }
 
