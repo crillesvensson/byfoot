@@ -11,6 +11,16 @@ Byfoot::Application.routes.draw do
 
   resources :places
 
+  post 'places/:place_id/:id/addimage/', to:'places#addimage', as: :add_image
+
+  get 'places/:image_id/:place_id/showimage', to: 'places#showimage', as: :show_image
+
+  get 'places/:image_id/:place_id/editimage', to: 'places#editimage', as: :edit_image
+
+  patch 'places/:place_id/:place_id/updateimage/', to:'places#updateimage', as: :update_image
+
+  delete 'places/:image_id/:place_id/deleteimage', to: 'places#destroyimage', as: :delete_image
+
 
   #Create user controller and and comment out root path for devise to work
   #root to: "user#home"

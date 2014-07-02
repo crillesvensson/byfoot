@@ -1,0 +1,11 @@
+<div id="userDiv">
+
+<h1><%= @image.title %></h1>
+<%= image_tag @image.image.url %>
+<p>
+<%= @image.description %>
+</p>
+<%= link_to "Back", :back %>
+<%= button_to 'Edit', edit_image_path(image_id: @image.id, place_id: @place.id ), method: :get  %>
+<%= link_to 'Delete', delete_image_path(image_id: @image.id), method: :delete, confirm: 'Are your sure?'  %>
+</div>

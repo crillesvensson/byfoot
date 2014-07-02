@@ -1,0 +1,19 @@
+<div id="signIn">
+<h1>Edit image</h1>
+
+<%= form_for @image, url: update_image_path(image_id: @image.id, place_id: @place.id), :html => { :multipart => true } do |f| %>   
+    <p>
+      <%= f.text_field :title, placeholder: 'Title' %>
+    </p>
+
+    <p>
+      <%= f.text_area :description, placeholder: 'Description' %>
+    </p>
+
+      <%= f.file_field :image %>
+      <p>  
+          <%= f.submit 'Add image'%>
+      </p>
+  <% end %>
+<%= link_to "Back", :back %>
+</div>
