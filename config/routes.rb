@@ -1,13 +1,15 @@
 Byfoot::Application.routes.draw do
 
+  
   root to: "users#show"
 
   patch 'users/update/:id', to: 'users#update', as: :update_user
-  
 
   devise_for :users
 
   resources :users, except: [:new ,:create, :destroy]
+
+  resources :places
 
 
   #Create user controller and and comment out root path for devise to work

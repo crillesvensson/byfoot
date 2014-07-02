@@ -43,6 +43,12 @@ gem "twitter-bootstrap-rails"
 #paperclip gem for uploading images
 gem "paperclip", :git => "git://github.com/thoughtbot/paperclip.git"
 
+#geocoder
+gem 'geocoder'
+
+#google map
+gem 'gmaps4rails'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 

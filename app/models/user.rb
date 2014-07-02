@@ -5,6 +5,8 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+
+  has_many :places, dependent: :destroy       
        
   has_attached_file :photo, styles: { small: "150x150>", medium: "250x250>" },
                   url: "/assets/users/:id/:style/:basename.:extension",
