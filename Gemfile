@@ -49,6 +49,9 @@ gem 'geocoder'
 #google map
 gem 'gmaps4rails'
 
+#google places api
+gem 'google_places'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 

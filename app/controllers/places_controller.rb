@@ -18,6 +18,23 @@ class PlacesController < ApplicationController
   	@place = @user.places.new
   end
 
+  def findplace
+    @user = current_user
+    @client = GooglePlaces::Client.new('AIzaSyBc1aKSdIj4Y4pszwFHO8cPxXY3llVf6Us')
+    if params[:search] != nil
+      location = Geocoder.coordinates(params[:search])
+      if location != nil && (!location.first.isBlank? && !location.second.isBlank?)
+        @spots = @client.spots(location.first, location.second, :types => 'food')
+      else
+        @spots = []
+        flash[:notice] = "No place found, try again"
+        render action: 'findplace'
+      end
+    else
+      @spots = []
+    end
+  end
+
   def create
   	@user = current_user
   	@place = @user.places.build(place_params)

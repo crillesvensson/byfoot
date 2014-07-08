@@ -1,0 +1,34 @@
+<div id="userDiv">
+<h1>Find place</h1>
+
+<%= form_tag find_place_path(current_user), :method => 'get' do %>
+  <p>
+    <%= text_field_tag :search, params[:search], placeholder: 'Place (e.g Stockholm, Sweden)' %>
+    </p>
+    <%= check_box_tag :food, checked = false %> Food
+    <%= check_box_tag :airport, checked = false %> Airport
+	<%= check_box_tag :atm, checked = false %> ATM
+    <%= check_box_tag :cafe, checked = false %> Cafe<br />
+    <%= check_box_tag :gym, checked = false %> Gym
+    <%= check_box_tag :night_club, checked = false %> Club
+    <%= check_box_tag :taxi_stand, checked = false %> Taxi
+    <%= check_box_tag :shopping_mall, checked = false %> Shopping
+	</br>
+	</br>
+<p>
+    <%= submit_tag "Search Place", :name => nil, class: 'btn btn-primary' %>
+  </p>
+<% end %>
+
+<% if @spots.size > 0 %>
+  	<table class="table table-striped">
+	  	<th>Name</th>
+
+  		<% @spots.each do |spot| %>
+			<tr>
+				<td><%= spot.name %></td>
+			</tr>
+		<% end %>
+	</table>
+<% end %>
+</div>

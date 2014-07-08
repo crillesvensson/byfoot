@@ -13,6 +13,8 @@ Byfoot::Application.routes.draw do
 
   get 'place/:id/:user_id', to: 'places#show', as: :show_place
 
+  get 'places/findplace/', to: 'places#findplace', as: :find_place
+
   post 'places/:place_id/:id/addimage/', to:'places#addimage', as: :add_image
 
   get 'places/:user_id/:image_id/:place_id/showimage', to: 'places#showimage', as: :show_image
