@@ -23,8 +23,13 @@ class PlacesController < ApplicationController
     @client = GooglePlaces::Client.new('AIzaSyBc1aKSdIj4Y4pszwFHO8cPxXY3llVf6Us')
     if params[:search] != nil
       location = Geocoder.coordinates(params[:search])
-      if location != nil && (!location.first.isBlank? && !location.second.isBlank?)
-        @spots = @client.spots(location.first, location.second, :types => 'food')
+      if location != nil && (!location.first.blank? && !location.second.blank?)
+        if params[:atm] == 'true'
+          type = 'atm'
+        else
+          type = 'food'
+        end
+        @spots = @client.spots(location.first, location.second, :types => type)
       else
         @spots = []
         flash[:notice] = "No place found, try again"
