@@ -1,10 +1,14 @@
 class PlacesController < ApplicationController
   def index
-
-  	@places = current_user.places
-	@hash = Gmaps4rails.build_markers(@places) do |place, marker|
-	  marker.lat place.latitude
-	  marker.lng place.longitude
+    if params[:id] != nil
+      @user = User.find(params[:id])
+    else
+      @user = current_user
+    end
+      @places = @user.places
+      @hash = Gmaps4rails.build_markers(@places) do |place, marker|
+      marker.lat place.latitude
+      marker.lng place.longitude
 	end
 
   end
@@ -36,6 +40,7 @@ class PlacesController < ApplicationController
   end
 
   def show
+    @user = User.find(params[:user_id])
   	@place = Place.find(params[:id])
   	@images = @place.images
   	@image = Image.new	
@@ -67,10 +72,11 @@ class PlacesController < ApplicationController
   	@place = Place.find(params[:place_id])
   	@image = @place.images.build(image_params)
   	@image.save
-  	redirect_to place_path(@place)
+  	redirect_to show_place_path(id: @place.id, user_id: current_user.id)
   end
 
   def showimage
+    @user = User.find(params[:user_id])
   	@place = Place.find(params[:place_id])
   	@image = Image.find(params[:image_id])
   end
@@ -85,7 +91,7 @@ class PlacesController < ApplicationController
   	image = Image.find(params[:image_id])
 
     if image.update(image_params)
-      redirect_to place_path(@place)
+      redirect_to show_place_path(id: @place.id, user_id: current_user.id)
     else
       render 'editimage'
     end
@@ -95,7 +101,7 @@ class PlacesController < ApplicationController
   	@place = Place.find(params[:place_id])
   	@image = Image.find(params[:image_id])
   	@image.destroy
-  	redirect_to place_path(@place)
+  	redirect_to show_place_path(id: @place.id, user_id: current_user.id)
   end
 
   private 

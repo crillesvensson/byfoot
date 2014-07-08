@@ -9,11 +9,13 @@ Byfoot::Application.routes.draw do
 
   resources :users, except: [:new ,:create, :destroy]
 
-  resources :places
+  resources :places, except: [:show]
+
+  get 'place/:id/:user_id', to: 'places#show', as: :show_place
 
   post 'places/:place_id/:id/addimage/', to:'places#addimage', as: :add_image
 
-  get 'places/:image_id/:place_id/showimage', to: 'places#showimage', as: :show_image
+  get 'places/:user_id/:image_id/:place_id/showimage', to: 'places#showimage', as: :show_image
 
   get 'places/:image_id/:place_id/editimage', to: 'places#editimage', as: :edit_image
 

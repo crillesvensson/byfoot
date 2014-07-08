@@ -1,10 +1,14 @@
 <div id="userDiv">
-	<div id="addimage"><%= link_to 'Add image', '#signIn' %></div>
+	<% if @user.id == current_user.id %>
+		<div id="addimage"><%= link_to 'Add image', '#signIn' %></div>
+	<% else %>
+		<div id="addimage"><p><%= link_to @user.firstname + ' ' + @user.lastname, user_path(@user), class: 'btn btn-mini btn-primary', method: :get  %></p></div>
+	<% end %>
 	<h1><%= @place.name %> </h1>
 	<h2><%= @place.address %></h2>
 	<%  if @images.size > 0%>
 		<% @images.each do |image| %>
-			<%= link_to show_image_path(image_id: image.id, place_id: @place.id) do %>
+			<%= link_to show_image_path(user_id: @user.id, image_id: image.id, place_id: @place.id) do %>
 			    <%= image_tag image.image.url(:medium) %>
 			<% end %>
 		<% end %>
@@ -14,23 +18,24 @@
 
 	
 </div>
+<% if @user.id == current_user.id %>
+	<div id="signIn">
+	<h1>Add new image</h1>
 
-<div id="signIn">
-<h1>Add new image</h1>
+	<%= form_for @image, url: add_image_path(place_id: @place.id), :html => { :multipart => true } do |f| %>   
+	    <p>
+	      <%= f.text_field :title, placeholder: 'Title' %>
+	    </p>
 
-<%= form_for @image, url: add_image_path(place_id: @place.id), :html => { :multipart => true } do |f| %>   
-    <p>
-      <%= f.text_field :title, placeholder: 'Title' %>
-    </p>
+	    <p>
+	      <%= f.text_area :description, placeholder: 'Description' %>
+	    </p>
 
-    <p>
-      <%= f.text_area :description, placeholder: 'Description' %>
-    </p>
-
-      <%= f.file_field :image %>
-      <p>  
-          <%= f.submit 'Add image'%>
-      </p>
-  <% end %>
-<%= link_to "Back", :back %>
-</div>
+	      <%= f.file_field :image %>
+	      <p>  
+	          <%= f.submit 'Add image'%>
+	      </p>
+	  <% end %>
+	<%= link_to "Back", :back %>
+	</div>
+<% end %>

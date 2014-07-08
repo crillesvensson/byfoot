@@ -41,5 +41,9 @@
     		</div>
   		</div>
   	</div>	
+
+  	<% if @user.id != current_user.id %>
+  		<%= link_to 'Places', places_path(id: @user.id), class: 'btn btn-mini btn-primary', method: :get  %>
+  	<% end %>
 	
 </div>
