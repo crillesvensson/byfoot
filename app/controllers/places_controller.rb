@@ -17,22 +17,22 @@ class PlacesController < ApplicationController
   def create
   	@user = current_user
   	@place = @user.places.build(place_params)
-	if @place.save
-	  	if @place.longitude.blank? || @place.latitude.blank?
-	  		@place.destroy
-	  		flash[:notice] = "Place not found, try again"
-	  		render action: 'new'
-	  	else
-	  		redirect_to places_path
-	  	end
-	else
-	  	render action: 'new'
-	end
+  	if @place.save
+  	  	if @place.longitude.blank? || @place.latitude.blank?
+  	  		@place.destroy
+  	  		flash[:notice] = "Place not found, try again"
+  	  		render action: 'new'
+  	  	else
+  	  		redirect_to places_path
+  	  	end
+  	else
+  	  	render action: 'new'
+  	end
   	
   end
 
   def edit
-  	
+  	@place = Place.find(params[:id])
   end
 
   def show
@@ -42,7 +42,19 @@ class PlacesController < ApplicationController
   end
 
   def update
-  	
+  	@place = Place.find(params[:id])
+    if @place.update(place_params)
+        if @place.longitude.blank? || @place.latitude.blank?
+          @place.destroy
+          flash[:notice] = "Place not found, try again"
+          render action: 'edit'
+        else
+          redirect_to places_path
+        end
+    else
+        render action: 'edit'
+    end
+
   end
 
   def destroy
