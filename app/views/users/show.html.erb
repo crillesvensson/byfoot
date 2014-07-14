@@ -17,19 +17,7 @@
 					    	<th>Last name</th>
 					    	<td><%= @user.lastname %></td>
 					  	</tr>
-					    <tr>
-					    	<th>E-mail</th>
-					    	<td><%= @user.email %></td>
-					  	</tr>
-					    <tr>
-					    	<th>Phone</th>
-					    	<td><%= @user.phone %></td>
-					  	</tr>
-					    <tr>
-					    	<th>Birthday</th>
-					    	<td><%= @user.birthday %></td>
-					  	</tr>
-					    <tr>
+					  	<tr>
 					    	<th>Country</th>
 					   	 	<td><%= @user.country %></td>
 					  	</tr>
@@ -37,18 +25,37 @@
 					    	<th>City</th>
 					   	 	<td><%= @user.city %></td>
 					  	</tr>
+					  	<% if current_user.id == @user.id || !current_user.friendships.find_by(friend_id: @user.id).blank? %>
+						    <tr>
+						    	<th>E-mail</th>
+						    	<td><%= @user.email %></td>
+						  	</tr>
+						    <tr>
+						    	<th>Phone</th>
+						    	<td><%= @user.phone %></td>
+						  	</tr>
+						    <tr>
+						    	<th>Birthday</th>
+						    	<td><%= @user.birthday %></td>
+						  	</tr> 
+						  	<% if !current_user.friendships.find_by(friend_id: @user.id).blank? %>
+							  	<tr>
+							    	<th>Friends</th>
+							    	<td>Yes</td>
+							  	</tr>
+						  	<% end %>
+					  	<% end %>
 					</table>  
     		</div>
   		</div>
   	</div>	
 
   	<% if @user.id != current_user.id %>
-  		<%= link_to 'Places', places_path(id: @user.id), class: 'btn btn-mini btn-primary', method: :get  %>
   		<%= link_to 'Send message', new_message_path(id: @user.id), class: 'btn btn-mini btn-primary', method: :get  %>
   		<% if current_user.friendships.find_by(friend_id: @user.id).blank? %>
-  			<%= link_to 'Add friend', friendships_path(friend_id: @user.id), class: 'btn btn-mini btn-primary', method: :post  %>
+  			<%= link_to 'Add as friend', friendships_path(friend_id: @user.id), class: 'btn btn-mini btn-primary', method: :post  %>
   		<% else %>
-  			<p>Friends</p>
+  			<%= link_to 'Places', places_path(id: @user.id), class: 'btn btn-mini btn-primary', method: :get  %>
   		<% end %>
   	<% end %>
 	
