@@ -1,0 +1,8 @@
+<div id="userDiv">
+<p>from: <%= link_to @user.firstname + ' ' + @user.lastname, user_path(@user), method: :get  %></p>
+<h1><%= @message.title %></h1>
+<h4><%= @message.message %></h4>
+<%= link_to 'Respond' ,new_message_path(id: @user.id), method: :get  %>
+<%= link_to "Back", :back %>
+
+</div>

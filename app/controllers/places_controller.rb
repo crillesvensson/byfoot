@@ -24,19 +24,61 @@ class PlacesController < ApplicationController
     if params[:search] != nil
       location = Geocoder.coordinates(params[:search])
       if location != nil && (!location.first.blank? && !location.second.blank?)
-        if params[:atm] == 'true'
-          type = 'atm'
-        else
-          type = 'food'
+        types = []
+        if params[:food] == 'true'
+          types << 'food'
         end
-        @spots = @client.spots(location.first, location.second, :types => type)
+        if params[:airport] == 'true'
+          types << 'airport'
+        end
+        if params[:atm] == 'true'
+          types << 'atm'
+        end
+        if params[:cafe] == 'true'
+          types << 'cafe'
+        end
+        if params[:gym] == 'true'
+          types << 'gym'
+        end
+        if params[:night_club] == 'true'
+          types << 'night_club'
+        end
+        if params[:taxi_stand] == 'true'
+          types << 'taxi_stand'
+        end
+        if params[:shopping_mall] == 'true'
+          types << 'shopping_mall'
+        end
+
+        if types.size == 0
+          types = 'food'
+        elsif types.size == 1
+          types = types.first
+        end
+
+        @spots = @client.spots(location.first, location.second, :types => types)
+        if @spots.blank? || @spots.size == 0
+          @places = []
+          flash[:notice] = "No place found, try again"
+          render action: 'findplace'
+        else
+          @places = []
+          @spots.each do |spot|
+            place = Place.new
+            place.name = spot.name
+            place.latitude = spot.lat
+            place.longitude = spot.lng
+            place.address = spot.vicinity
+            @places << place
+          end
+        end
       else
-        @spots = []
+        @places = []
         flash[:notice] = "No place found, try again"
         render action: 'findplace'
       end
     else
-      @spots = []
+      @places = []
     end
   end
 
@@ -55,6 +97,20 @@ class PlacesController < ApplicationController
   	  	render action: 'new'
   	end
   	
+  end
+
+  def showspot
+    places = []
+    @place = Place.new
+    @place.name = params[:name]
+    @place.address = params[:address]
+    @place.latitude = params[:lat]
+    @place.longitude = params[:lng]
+    places << @place
+    @hash = Gmaps4rails.build_markers(places) do |place, marker|
+      marker.lat place.latitude
+      marker.lng place.longitude
+    end
   end
 
   def edit

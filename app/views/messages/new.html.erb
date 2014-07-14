@@ -1,0 +1,29 @@
+<div id="signIn">
+<h1>Send message to <%= @user.firstname %></h1>
+<%= form_for @message, url: { action: :create, user_id: @user.id } do |f| %>
+  <% if @message.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@message.errors.count, "error") %> prohibited
+      this place from being created:</h2>
+    <ul>
+    <% @message.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+  <% end %>
+
+    <p>
+      <%= f.text_field :title, placeholder: 'Title' %>
+    </p>
+
+    <p>
+      <%= f.text_area :message, placeholder: 'Message' %>
+    </p>
+    <p>  
+      <%= f.submit 'Send'%>
+    </p>
+<% end %>
+ 
+<%= link_to "Back", :back %>
+</div>

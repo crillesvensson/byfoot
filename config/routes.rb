@@ -15,6 +15,8 @@ Byfoot::Application.routes.draw do
 
   get 'places/findplace/', to: 'places#findplace', as: :find_place
 
+  get 'places/showspot', to: 'places#showspot', as: :show_spot
+
   post 'places/:place_id/:id/addimage/', to:'places#addimage', as: :add_image
 
   get 'places/:user_id/:image_id/:place_id/showimage', to: 'places#showimage', as: :show_image
@@ -24,6 +26,8 @@ Byfoot::Application.routes.draw do
   patch 'places/:place_id/:place_id/updateimage/', to:'places#updateimage', as: :update_image
 
   delete 'places/:image_id/:place_id/deleteimage', to: 'places#destroyimage', as: :delete_image
+
+  resources :messages, except: [:update]
 
 
   #Create user controller and and comment out root path for devise to work
