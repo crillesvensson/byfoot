@@ -45,6 +45,11 @@
   	<% if @user.id != current_user.id %>
   		<%= link_to 'Places', places_path(id: @user.id), class: 'btn btn-mini btn-primary', method: :get  %>
   		<%= link_to 'Send message', new_message_path(id: @user.id), class: 'btn btn-mini btn-primary', method: :get  %>
+  		<% if current_user.friendships.find_by(friend_id: @user.id).blank? %>
+  			<%= link_to 'Add friend', friendships_path(friend_id: @user.id), class: 'btn btn-mini btn-primary', method: :post  %>
+  		<% else %>
+  			<p>Friends</p>
+  		<% end %>
   	<% end %>
 	
 </div>

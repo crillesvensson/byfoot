@@ -1,0 +1,24 @@
+<div id="userDiv">
+<h1>Friends</h1>
+
+<% if !@friends.empty? %>
+  	<table class="table table-striped">
+	  	<th>First name</th>
+	  	<th>Last name</th>
+	  	<th></th>
+	  	<th></th>
+
+  		<% @friends.each do |friend| %>
+  			<% user = User.find(friend.friend_id) %>
+			<tr>
+				<td><%= user.firstname %></td>
+				<td><%= user.lastname %></td>
+				<td><%= link_to 'Show', user_path(user), class: 'btn btn-mini btn-primary', method: :get  %></td>
+				<td><%= button_to 'Delete', friend, class: 'btn btn-mini', method: :delete, confirm: 'Are your sure?'  %>
+			</tr>
+		<% end %>
+	</table>
+<% else %>
+	<h4>No friends</h4>
+<% end %>
+</div>

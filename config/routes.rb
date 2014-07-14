@@ -29,6 +29,8 @@ Byfoot::Application.routes.draw do
 
   resources :messages, except: [:update]
 
+  resources :friendships, except: [:update, :show, :new, :edit]
+
 
   #Create user controller and and comment out root path for devise to work
   #root to: "user#home"

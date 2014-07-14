@@ -6,7 +6,11 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
 
-  has_many :places, dependent: :destroy       
+  has_many :places, dependent: :destroy    
+  has_many :friendships
+  has_many :friends, :through => :friendships
+  has_many :inverse_friendships, :class_name => "Friendship", :foreign_key => "friend_id"
+  has_many :inverse_friends, :through => :inverse_friendships, :source => :user   
        
   has_attached_file :photo, styles: { small: "150x150>", medium: "250x250>" },
                   url: "/assets/users/:id/:style/:basename.:extension",
