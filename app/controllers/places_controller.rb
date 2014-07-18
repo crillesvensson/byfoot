@@ -99,6 +99,23 @@ class PlacesController < ApplicationController
   	
   end
 
+  def userindex
+    @places = Place.where( "latitude = ? AND longitude = ?", params[:latitude], params[:longitude] )
+    @place = @places.first
+    @users = []
+    @places.each do |place|
+      if place.user_id != current_user.id
+        @users << User.find(place.user_id)
+      end
+    end
+
+    @hash = Gmaps4rails.build_markers(@place) do |place, marker|
+      marker.lat place.latitude
+      marker.lng place.longitude
+    end
+
+  end
+
   def showspot
     places = []
     @place = Place.new

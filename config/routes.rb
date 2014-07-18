@@ -7,9 +7,11 @@ Byfoot::Application.routes.draw do
 
   devise_for :users
 
-  resources :users, except: [:new ,:create, :destroy]
+  resources :users, except: [:new ,:create, :destroy] 
 
   resources :places, except: [:show]
+
+  get 'places/indexforplace/', to: 'places#userindex', as: :place_users
 
   get 'place/:id/:user_id', to: 'places#show', as: :show_place
 
