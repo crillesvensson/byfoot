@@ -1,6 +1,26 @@
 <div id="userDiv">
-<h1>Friends</h1>
 
+<% if !@friendRequests.empty? %>
+	<h1>Requests</h1>
+  	<table class="table table-striped">
+	  	<th>First name</th>
+	  	<th>Last name</th>
+	  	<th></th>
+	  	<th></th>
+
+  		<% @friendRequests.each do |friend| %>
+  			<% user = User.find(friend.user_id) %>
+			<tr>
+				<td><%= user.firstname %></td>
+				<td><%= user.lastname %></td>
+				<td><%= link_to 'Accept', friendship_path(id: friend.id, accept: true, user_id: user.id), class: 'btn btn-mini btn-primary', method: :patch  %></td>
+				<td><%= link_to 'Decline', friendship_path(id: friend.id, accept: false, user_id: user.id), class: 'btn btn-mini', method: :patch  %>
+			</tr>
+		<% end %>
+	</table>
+<% end %>
+<br />	
+<h1>Friends</h1>
 <% if !@friends.empty? %>
   	<table class="table table-striped">
 	  	<th>First name</th>
@@ -8,13 +28,16 @@
 	  	<th></th>
 	  	<th></th>
 
-  		<% @friends.each do |friend| %>
-  			<% user = User.find(friend.friend_id) %>
+  		<% @friends.each do |user| %>
+  			<% friend = Friendship.where( 'user_id = ? AND friend_id = ?', user.id, current_user.id ).first %>
+  			<% if friend.blank? %>
+  				<% friend = Friendship.where( 'user_id = ? AND friend_id = ?', current_user.id, user.id ).first %>
+  			<% end %>
 			<tr>
 				<td><%= user.firstname %></td>
 				<td><%= user.lastname %></td>
 				<td><%= link_to 'Show', user_path(user), class: 'btn btn-mini btn-primary', method: :get  %></td>
-				<td><%= button_to 'Delete', friend, class: 'btn btn-mini', method: :delete, confirm: 'Are your sure?'  %>
+				<td><%= link_to 'Delete', friendship_path(id: friend.id, friend_id: user.id), class: 'btn btn-mini', method: :delete, confirm: 'Are your sure?'  %>
 			</tr>
 		<% end %>
 	</table>

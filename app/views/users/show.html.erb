@@ -25,7 +25,9 @@
 					    	<th>City</th>
 					   	 	<td><%= @user.city %></td>
 					  	</tr>
-					  	<% if current_user.id == @user.id || !current_user.friendships.find_by(friend_id: @user.id).blank? %>
+					  	<% if current_user.id == @user.id || ((!current_user.friendships.find_by(friend_id: @user.id).blank? && current_user.friendships.find_by(friend_id: @user.id).accepted) || 
+					  		(!@user.friendships.find_by(friend_id: current_user.id).blank? && @user.friendships.find_by(friend_id: current_user.id).accepted) 
+					  		) %>
 						    <tr>
 						    	<th>E-mail</th>
 						    	<td><%= @user.email %></td>
@@ -52,9 +54,9 @@
 
   	<% if @user.id != current_user.id %>
   		<%= link_to 'Send message', new_message_path(id: @user.id), class: 'btn btn-mini btn-primary', method: :get  %>
-  		<% if current_user.friendships.find_by(friend_id: @user.id).blank? %>
-  			<%= link_to 'Add as friend', friendships_path(friend_id: @user.id), class: 'btn btn-mini btn-primary', method: :post  %>
-  		<% else %>
+  		<% if current_user.friendships.find_by(friend_id: @user.id).blank? && @user.friendships.find_by(friend_id: current_user.id).blank? %>
+  				<%= link_to 'Add as friend', friendships_path(friend_id: @user.id), class: 'btn btn-mini btn-primary', method: :post  %>
+  		<% elsif (!current_user.friendships.find_by(friend_id: @user.id).blank? && current_user.friendships.find_by(friend_id: @user.id).accepted) || (!@user.friendships.find_by(friend_id: current_user.id).blank? && @user.friendships.find_by(friend_id: current_user.id).accepted) %>
   			<%= link_to 'Places', places_path(id: @user.id), class: 'btn btn-mini btn-primary', method: :get  %>
   		<% end %>
   	<% end %>
