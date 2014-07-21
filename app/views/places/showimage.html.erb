@@ -1,3 +1,12 @@
+<div id="menuDiv">
+	<% if @user.id == current_user.id %>
+		<%= link_to 'Edit', edit_image_path(image_id: @image.id, place_id: @place.id ), class: 'btn btn-mini btn-primary', method: :get  %> 
+		<%= link_to 'Delete', delete_image_path(image_id: @image.id), class: 'btn btn-mini', method: :delete, confirm: 'Are your sure?'  %>
+	<% end %><br /> <br />
+	<%= link_to "Back", :back, class: 'btn btn-mini btn-primary' %>
+	
+</div>
+
 <div id="userDiv">
 	<% if @user.id != current_user.id %>
 		<div id="addimage"><p><%= link_to @user.firstname + ' ' + @user.lastname, user_path(@user), class: 'btn btn-mini btn-primary', method: :get  %></p></div>
@@ -7,9 +16,4 @@
 	<p>
 		<%= @image.description %>
 	</p>
-	<%= link_to "Back", :back %>
-	<% if @user.id == current_user.id %>
-		<%= button_to 'Edit', edit_image_path(image_id: @image.id, place_id: @place.id ), method: :get  %>
-		<%= link_to 'Delete', delete_image_path(image_id: @image.id), method: :delete, confirm: 'Are your sure?'  %>
-	<% end %>
 </div>
