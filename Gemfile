@@ -52,6 +52,11 @@ gem 'gmaps4rails'
 #google places api
 gem 'google_places'
 
+#private but gem for chat
+gem 'private_pub'
+
+gem 'thin'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 

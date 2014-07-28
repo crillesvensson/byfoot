@@ -33,6 +33,9 @@ Byfoot::Application.routes.draw do
 
   resources :friendships, except: [:show, :new, :edit]
 
+  get '/chats', to: 'chats#index', as: :chats
+
+  post '/chats', to: 'chats#create'
 
 
 
