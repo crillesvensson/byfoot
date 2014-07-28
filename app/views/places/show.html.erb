@@ -1,12 +1,17 @@
-<div id="menuDiv">
-<% if @user.id == current_user.id %>
-		<%= link_to 'Add image', '#signIn', class: 'btn btn-mini btn-primary' %> <br /> <br />
-		<%= link_to 'Other visitors', place_users_path(latitude: @place.latitude, longitude: @place.longitude), class: 'btn btn-mini btn-primary', method: :get %>
+<div id="customNavbar">
+<div class="navbar">
+  <div class="navbar-inner">
+  	<ul class="nav">
+    <% if @user.id == current_user.id %>
+		<li><%= link_to 'Add image', '#signIn' %></li>
+		<li><%= link_to 'Other visitors', place_users_path(latitude: @place.latitude, longitude: @place.longitude), method: :get %></li>
 	<% else %>
-		<%= link_to @user.firstname + ' ' + @user.lastname, user_path(@user), class: 'btn btn-mini btn-primary', method: :get  %>
+		<li><%= link_to @user.firstname + ' ' + @user.lastname, user_path(@user), method: :get  %></li>
 	<% end %>
+    </ul>
+  </div>
 </div>
-
+</div>
 <div id="userDiv">
 	
 	<h1><%= @place.name %> </h1>
@@ -22,6 +27,7 @@
 	<% end %>
 	
 </div>
+
 <% if @user.id == current_user.id %>
 	<div id="signIn">
 	<h1>Add new image</h1>

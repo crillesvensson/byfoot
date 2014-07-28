@@ -1,8 +1,15 @@
+<div id="customNavbarLarge">
+<div class="navbar">
+  <div class="navbar-inner">
+  	<ul class="nav">
+		<li><%= link_to 'From:  ' + @user.firstname + ' ' + @user.lastname, user_path(@user), method: :get  %></li>
+		<li><%= link_to 'Respond' ,new_message_path(id: @user.id), method: :get  %></li>
+		<li><%= link_to "Back", :back %></li>
+    </ul>
+  </div>
+</div>
+</div>
 <div id="userDiv">
-<p>from: <%= link_to @user.firstname + ' ' + @user.lastname, user_path(@user), method: :get  %></p>
 <h1><%= @message.title %></h1>
 <h4><%= @message.message %></h4>
-<%= link_to 'Respond' ,new_message_path(id: @user.id), method: :get  %>
-<%= link_to "Back", :back %>
-
 </div>
