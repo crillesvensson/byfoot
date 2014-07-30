@@ -2,21 +2,39 @@
 <h1>Messages</h1>
 
 <% if !@messages.empty? %>
-  	<table class="table table-striped">
-	  	<th>Title</th>
-	  	<th>Read</th>
-	  	<th></th>
-	  	<th></th>
+	  	<table class="table table-striped">
+		  	<th>Title</th>
+		  	<th></th>
+		  	<th></th>
+		  	<th></th>
+		  	<th></th>
 
-  		<% @messages.each do |message| %>
-			<tr>
-				<td><%= message.title %></td>
-				<td><%= message.hasread %></td>
-				<td><%= link_to 'Show', message_path(message, sender: message.sender), class: 'btn btn-mini btn-primary', method: :get  %></td>
-				<td><%= button_to 'Delete', message, class: 'btn btn-mini', method: :delete, confirm: 'Are your sure?'  %>
-			</tr>
-		<% end %>
-	</table>
+		  	<% if !@newMessages.empty? %>
+		  		<% @newMessages.each do |message| %>
+					<tr>
+						<td><%= message.title %></td>
+						<td>New</td>
+						<td></td>
+						<td><%= link_to 'Show', message_path(message, sender: message.sender), class: 'btn btn-mini btn-primary', method: :get  %></td>
+						<td><%= button_to 'Delete', message, class: 'btn btn-mini', method: :delete, confirm: 'Are your sure?'  %>
+					</tr>
+				<% end %>
+					
+		  	<% end %>
+
+		  	<% if !@oldMessages.empty? %>
+		  		<% @oldMessages.each do |message| %>
+					<tr>
+						<td><%= message.title %></td>
+						<td></td>
+						<td></td>
+						<td><%= link_to 'Show', message_path(message, sender: message.sender), class: 'btn btn-mini btn-primary', method: :get  %></td>
+						<td><%= button_to 'Delete', message, class: 'btn btn-mini', method: :delete, confirm: 'Are your sure?'  %></td>
+					</tr>
+				<% end %>
+			<% end %>
+		</table>
+	
 <% else %>
 	<h4>No messages</h4>
 <% end %>

@@ -1,10 +1,12 @@
-<h1>Chat</h1>
+<div id="signIn">
+	<h1>Chat</h1>
 
-<%= render 'chat' %>
+	<%= render 'chat' %>
 
-<%= form_for Chat.new, remote: true do |f| %>
-  <%= f.text_field :message %>
-  <%= f.submit "Send" %>
-<% end %>
+	<%= form_for Chat.new, remote: true do |f| %>
+	  <%= f.text_field :message, placeholder: 'Enter chat message' %>
+	  <%= f.submit "Send" %>
+	<% end %>
 
-<%= subscribe_to "/chats/new" %>
+	<%= subscribe_to "/chats/new" %>
+</div>

@@ -2,6 +2,8 @@ class MessagesController < ApplicationController
 
 	def index
 		@messages = Message.where("receiver = ?", current_user.id).order('id DESC')
+		@newMessages = Message.where("receiver = ? AND hasRead = ?",current_user.id, false)
+		@oldMessages = Message.where("receiver = ? AND hasRead = ?",current_user.id, true)
 	end
 
 	def create
