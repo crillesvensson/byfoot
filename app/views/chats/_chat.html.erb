@@ -1,3 +1,1 @@
-<%= form_for Chat.new, remote: true do |f| %>
-  <%= f.text_area :message, placeholder: 'Messages' %>
-<% end %>
+<li><%= chat.message %>               <p><%= chat.created_at.to_s(:time) %></p></li>

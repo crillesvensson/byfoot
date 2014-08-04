@@ -155,6 +155,16 @@ body {
     font-size: 13px;
 }
 
+#chat li{
+    list-style-type: none;
+    text-align: left;
+}
+
+ul#chat p{
+    text-align: right;
+}
+
+
 //Design of placeholders
 #signIn input::-webkit-input-placeholder,
 #signIn textarea::-webkit-input-placeholder {
@@ -252,4 +262,51 @@ body {
 	background:none;
 	border: 0px transparent;
 	margin-top: 50px;
+}
+
+.checkboxCustom {
+  width: 20px;
+  position: relative;
+  margin: 20px auto;
+  label {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    left: 0;
+    @include background( linear-gradient(top, #222 0%, #45484d 100%) );
+    @include border-radius( 4px );
+    @include box-shadow( inset 0px 1px 1px rgba(0,0,0,0.5), 0px 1px 0px rgba(255,255,255,.4) );
+    &:after {
+      content: '';
+      width: 9px;
+      height: 5px;
+      position: absolute;
+      top: 4px;
+      left: 4px;
+      border: 3px solid #fcfff4;
+      border-top: none;
+      border-right: none;
+      background: transparent;
+      @include opacity( 0 );
+      @include transform( rotate(-45deg) );
+    }
+    &:hover::after {
+      @include opacity( 0.3 );
+    }
+  }
+  input[type=checkbox] {
+    visibility: hidden;
+    &:checked + label:after {
+      @include opacity( 1 );
+    }    
+  }
+}
+
+userDiv#input[type=checkboxtag]{
+    /* Font styles */
+    font-family: 'Raleway', 'Lato', Arial, sans-serif;
+    color: #fff;
+    font-size: 13px;
 }
